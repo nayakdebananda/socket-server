@@ -5,7 +5,9 @@ const io = require("socket.io")(server, {
     origin: "*",
   },
 })
-
+app.get("/", (req, res) => {
+  res.send("Hello")
+})
 io.on("connection", socket => {
   console.log("socket is active")
   socket.on("chat", payload => {
@@ -14,6 +16,6 @@ io.on("connection", socket => {
   })
 })
 
-server.listen(5000, () => {
+server.listen(process.env.PORT || 5000, () => {
   console.log("listening on *:5000")
 })
